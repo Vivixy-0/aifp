@@ -1,4 +1,5 @@
 # dependencies
+
 /node_modules
 /.pnp
 .pnp.js
@@ -34,4 +35,4 @@ yarn-error.log*
 next-env.d.ts
 
 # local repositories
-/ai-housing-budget-calculator
+/ai-housing-budget-calculator 
