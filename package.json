@@ -1,16 +1,16 @@
 {
   "name": "aifp",
   "version": "1.0.0",
+  "description": "AI Financial Planner - あなたの財務計画をサポートするAIツール",
   "scripts": {
     "dev": "cd ai-housing-budget-calculator && npm run dev",
     "build": "cd ai-housing-budget-calculator && npm run build",
-    "start": "cd ai-housing-budget-calculator && npm run start"
+    "start": "cd ai-housing-budget-calculator && npm run start",
+    "clean": "cd ai-housing-budget-calculator && npm run clean"
   },
-  "dependencies": {
-    "@heroicons/react": "^2.2.0",
-    "@supabase/supabase-js": "^2.49.4"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Vivixy-0/aifp.git"
   },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.5"
-  }
+  "license": "MIT"
 }
