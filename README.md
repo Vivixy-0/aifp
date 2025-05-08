@@ -1,84 +1,126 @@
-<<<<<<< HEAD
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-=======
-# AIFP
+# AIFP - 安心予算AI診断＆シミュレーションチャットボット
 
 AI Financial Planner - あなたの財務計画をサポートするAIツール
 
 ## 概要
 
-このプロジェクトは、AIを活用した財務計画サポートツールです。ユーザーの収入や支出のデータを分析し、最適な予算配分や貯蓄計画を提案します。
+このプロジェクトは、AIを活用した財務計画サポートツールです。家計健全度診断とシミュレーションを行うAIチャットボットとして、ユーザーの収入や支出のデータを分析し、最適な予算配分や貯蓄計画を提案します。Vercel AI SDKとOpenAI、SupabaseのPostgreSQLベクトルデータベースを使用したRAG（Retrieval Augmented Generation）実装により、信頼性の高い財務アドバイスを提供します。
 
-## プロジェクト構造
+## 機能概要
 
-このリポジトリは、AI住宅予算診断ツールのルートディレクトリです。実際のアプリケーションは `ai-housing-budget-calculator` ディレクトリ内に格納されています。
+- **チャットインターフェース**: リアルタイムストリーミングによる会話形式の操作
+- **RAG (Retrieval Augmented Generation)**: 金融知識データベースからの関連情報検索と回答生成
+- **簡易診断**: 主要な家計指標を即時計算しシグナル表示
+- **詳細シミュレーション**: 複数の将来シナリオのMonte Carloシミュレーション
+- **ユーザー管理**: Supabaseによる認証と権限管理
+- **レポート生成**: 診断・シミュレーション結果のPDF出力
+- **AI住宅予算診断**: 住宅購入に関する予算診断と提案
 
-- `/ai-housing-budget-calculator` - メインアプリケーションコード
-- `/ai-housing-budget-calculator/migrations` - データベースマイグレーションスクリプト
+## 技術スタック
 
-## 機能
+- **フロントエンド**: Next.js, React, Tailwind CSS
+- **AI**: OpenAI GPT, AI SDK, Vector Embeddings
+- **バックエンド**: Next.js API Routes (Edge Runtime)
+- **データベース**: Supabase (PostgreSQL + pgvector)
+- **認証**: Supabase Auth
+- **視覚化**: Recharts
 
-- 収支管理
-- 予算計画
-- 資産配分の提案
-- 支出分析
-- AI住宅予算診断
+## 開発環境のセットアップ
 
-## 開発環境
+### 前提条件
 
-- Node.js
-- Next.js
-- Supabase
-- TypeScript
-- Tailwind CSS
+- Node.js 18以上
+- Supabaseアカウント
+- OpenAIアカウントとAPIキー
 
-## インストール方法
+### インストール手順
 
-```
+1. リポジトリをクローン
+
+```bash
 git clone https://github.com/Vivixy-0/aifp.git
 cd aifp
 npm install
+```
+
+2. 環境変数の設定
+
+`.env.local`ファイルを作成し、以下の変数を設定:
+
+```
+# Supabase設定
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
+
+# OpenAI設定
+OPENAI_API_KEY=your-openai-api-key
+
+# ベースURL
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+```
+
+3. Supabaseデータベースのセットアップ
+
+Supabaseダッシュボードでプロジェクトを作成し、PostgreSQLデータベースに必要なスキーマを設定します。カスタムセットアップスクリプトを実行:
+
+```bash
+npx tsx lib/db/setup-supabase.ts
+```
+
+4. 開発サーバーの起動
+
+```bash
 npm run dev
 ```
 
-詳細なインストール方法と設定については、`ai-housing-budget-calculator` ディレクトリ内のREADMEを参照してください。
+アプリケーションは http://localhost:3000 で利用可能になります。
+
+## RAGナレッジベースの構築
+
+金融知識のナレッジベースを構築するには、以下のスクリプトを使用します:
+
+```typescript
+import { storeDocument } from '@/lib/ai/rag';
+
+// ナレッジベースに金融情報を追加する例
+async function seedKnowledgeBase() {
+  await storeDocument(
+    '貯蓄率は手取り収入に対する貯蓄額の割合で、一般的に20%以上が推奨されます。',
+    { category: 'financial_literacy', topic: 'savings_rate' }
+  );
+  
+  // さらにドキュメントを追加...
+}
+
+seedKnowledgeBase();
+```
+
+## プロジェクト構造
+
+```
+aifp/
+├── app/                 # Next.js App Router
+│   ├── api/             # APIエンドポイント
+│   │   ├── ai/          # AI関連API
+│   │   └── auth/        # 認証関連API
+│   ├── auth/            # 認証関連ページ
+│   ├── dashboard/       # ダッシュボード
+│   └── simulation/      # シミュレーションページ
+├── components/          # Reactコンポーネント
+│   ├── ui/              # 共通UIコンポーネント
+│   ├── chat/            # チャット関連コンポーネント
+│   ├── assessment/      # 診断関連コンポーネント
+│   └── simulation/      # シミュレーション関連コンポーネント
+├── lib/                 # ユーティリティ関数
+│   ├── db/              # データベース関連
+│   ├── ai/              # AI/RAG関連
+│   ├── auth/            # 認証関連
+│   └── utils/           # 汎用ユーティリティ
+├── migrations/          # データベースマイグレーション
+└── public/              # 静的ファイル
+```
 
 ## ライセンス
 
-MIT
->>>>>>> 90fd77da014a0738c11d1122c5d51620e921785f
+MIT 

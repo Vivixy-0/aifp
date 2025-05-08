@@ -1,39 +1,4 @@
 {
-<<<<<<< HEAD
-  "name": "groove_aifp",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@heroicons/react": "^2.2.0",
-    "@supabase/auth-helpers-nextjs": "^0.10.0",
-    "@supabase/supabase-js": "^2.49.4",
-    "@tailwindcss/typography": "^0.5.16",
-    "ai": "^4.3.15",
-    "next": "15.3.2",
-    "openai": "^4.97.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "recharts": "^2.15.3",
-    "zod": "^3.24.4"
-  },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20.17.45",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.3.2",
-    "tailwindcss": "^4",
-    "typescript": "^5"
-  }
-=======
   "name": "aifp",
   "version": "1.0.0",
   "description": "AI Financial Planner - あなたの財務計画をサポートするAIツール",
@@ -48,5 +13,4 @@
     "url": "https://github.com/Vivixy-0/aifp.git"
   },
   "license": "MIT"
->>>>>>> 90fd77da014a0738c11d1122c5d51620e921785f
-}
+} 
