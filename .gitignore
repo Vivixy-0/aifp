@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
@@ -9,6 +10,12 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+=======
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+>>>>>>> 90fd77da014a0738c11d1122c5d51620e921785f
 
 # testing
 /coverage
@@ -28,10 +35,17 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+=======
+
+# local env files
+.env*.local
+.env
+>>>>>>> 90fd77da014a0738c11d1122c5d51620e921785f
 
 # vercel
 .vercel
@@ -39,3 +53,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+<<<<<<< HEAD
+=======
+
+# local repositories
+/ai-housing-budget-calculator
+>>>>>>> 90fd77da014a0738c11d1122c5d51620e921785f
